@@ -121,11 +121,21 @@ class IssueList extends React.Component{
 	constructor(){
 		super();
 		//we initialize state here
-		this.state = { issues: issues };
+		this.state = { issues: [] };
 		//we make a timer to create a new issue
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
 		setTimeout(this.createTestIssue.bind(this), 2000);
+	}
+
+	componentDidMount(){
+		this.loadData();
+	}
+
+	loadData(){
+		setTimeout(() => {
+			this.setState({ issues: issues });
+		}, 500);
 	}
 
 	createIssue(newIssue){
