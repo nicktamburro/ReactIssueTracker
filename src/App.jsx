@@ -20,6 +20,7 @@ class BorderWrap extends React.Component{
 
 class IssueRow extends React.Component{
 	render(){
+		console.log("rendered!");
 		const borderedStyle = {border: "1px solid silver", padding: 4};
 		const issue = this.props.issue;
 		return(
@@ -130,8 +131,11 @@ class IssueList extends React.Component{
 	createIssue(newIssue){
 		//TODO: why did we use slice, instead of just pushing the new issue in?
 		//RIGHTTTTTT we're not supposed to modify the state directly!
+		//so we make a new array, that includes the entire old one
 		const newIssues = this.state.issues.slice();
+		//and then we make a new id, one more than whatever it was already
 		newIssue.id = this.state.issues.length + 1;
+		//and THEN we push in the new issue
 		newIssues.push(newIssue);
 		//when we setState, it triggers a rerendering
 		this.setState({ issues: newIssues });

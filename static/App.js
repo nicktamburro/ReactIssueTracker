@@ -53,6 +53,7 @@ var IssueRow = function (_React$Component2) {
 	_createClass(IssueRow, [{
 		key: "render",
 		value: function render() {
+			console.log("rendered!");
 			var borderedStyle = { border: "1px solid silver", padding: 4 };
 			var issue = this.props.issue;
 			return (
@@ -279,8 +280,11 @@ var IssueList = function (_React$Component6) {
 		value: function createIssue(newIssue) {
 			//TODO: why did we use slice, instead of just pushing the new issue in?
 			//RIGHTTTTTT we're not supposed to modify the state directly!
+			//so we make a new array, that includes the entire old one
 			var newIssues = this.state.issues.slice();
+			//and then we make a new id, one more than whatever it was already
 			newIssue.id = this.state.issues.length + 1;
+			//and THEN we push in the new issue
 			newIssues.push(newIssue);
 			//when we setState, it triggers a rerendering
 			this.setState({ issues: newIssues });
