@@ -300,11 +300,12 @@ var IssueList = function (_React$Component6) {
 		//HERE, we we got rid of multiple binds
 		//by this.createTestIssue with a permanently bound version
 		//it used to be bound INSIDE the setTimeout, but we moved it up here
-		_this6.createTestIssue = _this6.createTestIssue.bind(_this6);
+		//this.createTestIssue = this.createTestIssue.bind(this);
 		//we make a timer to create a new issue
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
-		setTimeout(_this6.createTestIssue, 2000);
+		//setTimeout(this.createTestIssue, 2000);
+		_this6.createIssue = _this6.createIssue.bind(_this6);
 		return _this6;
 	}
 
@@ -336,14 +337,14 @@ var IssueList = function (_React$Component6) {
 			//when we setState, it triggers a rerendering
 			this.setState({ issues: newIssues });
 		}
-	}, {
-		key: "createTestIssue",
-		value: function createTestIssue() {
-			this.createIssue({
-				status: 'New', owner: 'Cliff Burton', created: new Date(),
-				title: 'My old band is no longer good.'
-			});
-		}
+
+		/*	createTestIssue(){
+  		this.createIssue({
+  			status: 'New', owner: 'Cliff Burton', created: new Date(),
+  			title: 'My old band is no longer good.'
+  		});
+  	}*/
+
 	}, {
 		key: "render",
 		value: function render() {
@@ -358,13 +359,8 @@ var IssueList = function (_React$Component6) {
 				React.createElement(IssueFilter, null),
 				React.createElement("hr", null),
 				React.createElement(IssueTable, { issues: this.state.issues }),
-				React.createElement(
-					"button",
-					{ onClick: this.createTestIssue },
-					"Add"
-				),
 				React.createElement("hr", null),
-				React.createElement(IssueAdd, null)
+				React.createElement(IssueAdd, { createIssue: this.createIssue })
 			);
 		}
 	}]);

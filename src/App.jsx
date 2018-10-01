@@ -200,7 +200,7 @@ class IssueList extends React.Component{
 			properties, now it's using the "issues" array as its source data*/}
 			<IssueTable issues={this.state.issues}/>
 			<hr/>
-			<IssueAdd />	
+			<IssueAdd createIssue={this.createIssue}/>	
 			</div>
 		);
 	}
