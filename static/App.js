@@ -162,7 +162,7 @@ var IssueTable = function (_React$Component4) {
 			//props
 			var borderedStyle = { border: "1px solid silver", padding: 6 };
 			return (
-				//why is there a double curly brace here?
+				//but why is there a double curly brace here?
 
 				//the FIRST brace is our "escape into Javascript"
 				//the second brace is just an object, the attribute's value
@@ -268,10 +268,15 @@ var IssueList = function (_React$Component6) {
 		var _this6 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
 		_this6.state = { issues: [] };
+
+		//HERE, we we got rid of multiple binds
+		//by this.createTestIssue with a permanently bound version
+		//it used to be bound INSIDE the setTimeout, but we moved it up here
+		_this6.createTestIssue = _this6.createTestIssue.bind(_this6);
 		//we make a timer to create a new issue
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
-		setTimeout(_this6.createTestIssue.bind(_this6), 2000);
+		setTimeout(_this6.createTestIssue, 2000);
 		return _this6;
 	}
 
@@ -325,6 +330,11 @@ var IssueList = function (_React$Component6) {
 				React.createElement(IssueFilter, null),
 				React.createElement("hr", null),
 				React.createElement(IssueTable, { issues: this.state.issues }),
+				React.createElement(
+					"button",
+					{ onClick: this.createTestIssue },
+					"Add"
+				),
 				React.createElement("hr", null),
 				React.createElement(IssueAdd, null)
 			);
