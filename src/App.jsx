@@ -151,11 +151,12 @@ class IssueList extends React.Component{
 		//HERE, we we got rid of multiple binds
 		//by this.createTestIssue with a permanently bound version
 		//it used to be bound INSIDE the setTimeout, but we moved it up here
-		this.createTestIssue = this.createTestIssue.bind(this);
+		//this.createTestIssue = this.createTestIssue.bind(this);
 		//we make a timer to create a new issue
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
-		setTimeout(this.createTestIssue, 2000);
+		//setTimeout(this.createTestIssue, 2000);
+		this.createIssue = this.createIssue.bind(this);
 	}
 
 	componentDidMount(){
@@ -181,12 +182,12 @@ class IssueList extends React.Component{
 		this.setState({ issues: newIssues });
 	}
 
-	createTestIssue(){
+/*	createTestIssue(){
 		this.createIssue({
 			status: 'New', owner: 'Cliff Burton', created: new Date(),
 			title: 'My old band is no longer good.'
 		});
-	}
+	}*/
 
 
 	render(){
@@ -198,7 +199,6 @@ class IssueList extends React.Component{
 			{/* we pass the data contained in state to IssueTable via
 			properties, now it's using the "issues" array as its source data*/}
 			<IssueTable issues={this.state.issues}/>
-			<button onClick={this.createTestIssue}>Add</button>
 			<hr/>
 			<IssueAdd />	
 			</div>

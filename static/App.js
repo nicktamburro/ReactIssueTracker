@@ -231,16 +231,44 @@ var IssueAdd = function (_React$Component5) {
 	function IssueAdd() {
 		_classCallCheck(this, IssueAdd);
 
-		return _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).apply(this, arguments));
+		//bound this up here, so the code below can be smoother
+		var _this5 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
+
+		_this5.handleSubmit = _this5.handleSubmit.bind(_this5);
+		return _this5;
 	}
 
 	_createClass(IssueAdd, [{
+		key: "handleSubmit",
+		value: function handleSubmit(e) {
+			e.preventDefault();
+			var form = document.forms.issueAdd;
+			this.props.createIssue({
+				owner: form.owner.value,
+				title: form.title.value,
+				status: 'New',
+				created: new Date()
+			});
+			//clear the form for next input
+			form.owner.value = "";form.title.value = "";
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			return React.createElement(
 				"div",
 				null,
-				"Issue Add goes here"
+				React.createElement(
+					"form",
+					{ name: "issueAdd", onSubmit: this.handleSubmit },
+					React.createElement("input", { type: "text", name: "owner", placeholder: "Owner" }),
+					React.createElement("input", { type: "text", name: "title", placeholder: "Title" }),
+					React.createElement(
+						"button",
+						null,
+						"Add"
+					)
+				)
 			);
 		}
 	}]);
