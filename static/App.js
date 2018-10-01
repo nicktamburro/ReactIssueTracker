@@ -267,7 +267,7 @@ var IssueList = function (_React$Component6) {
 		//we initialize state here
 		var _this6 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
-		_this6.state = { issues: issues };
+		_this6.state = { issues: [] };
 		//we make a timer to create a new issue
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
@@ -276,6 +276,20 @@ var IssueList = function (_React$Component6) {
 	}
 
 	_createClass(IssueList, [{
+		key: "componentDidMount",
+		value: function componentDidMount() {
+			this.loadData();
+		}
+	}, {
+		key: "loadData",
+		value: function loadData() {
+			var _this7 = this;
+
+			setTimeout(function () {
+				_this7.setState({ issues: issues });
+			}, 500);
+		}
+	}, {
 		key: "createIssue",
 		value: function createIssue(newIssue) {
 			//TODO: why did we use slice, instead of just pushing the new issue in?
