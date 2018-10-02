@@ -24,14 +24,9 @@ class IssueRow extends React.Component{
 		const borderedStyle = {border: "1px solid silver", padding: 4};
 		const issue = this.props.issue;
 		return(
-			//this IssueRow passes these things on to its children
-			//the style and the props below
-			//so the issue_id CAN'T be changed to children yet, it just showed the
-			//issue title twice, instead of id and title
+	
 			<tr>
-			{/* TODO, we shouldn't have to paste this into
-			each <td> right??*/
-				//OH we're gonna do it in the html DONE!
+			{
 				}
 				<td>{issue.id}</td>
 				<td>{issue.status}</td>
@@ -46,7 +41,7 @@ class IssueRow extends React.Component{
 	}
 }
 
-//this was coming up as undefined because I had it above the IssueRow class!
+//this was coming up as undefined because I had it above the IssueRow class
 
 //we only do this in development mode, when properties are more likely to change
 IssueRow.propTypes = {
@@ -81,7 +76,7 @@ class IssueTable extends React.Component{
 					<tr>
 						<th>Id</th>
 						<th>Status</th>
-						<th>Ownder</th>
+						<th>Owner</th>
 						<th>Created</th>
 						<th>Effort</th>
 						<th>Completion Date</th>
