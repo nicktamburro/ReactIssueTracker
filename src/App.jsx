@@ -140,7 +140,7 @@ const issues = [
 class IssueList extends React.Component{
 	constructor(){
 		super();
-		//we initialize state here
+		//initialize state
 		this.state = { issues: [] };
 		
 		//HERE, we we got rid of multiple binds
@@ -165,8 +165,7 @@ class IssueList extends React.Component{
 	}
 
 	createIssue(newIssue){
-		//TODO: why did we use slice, instead of just pushing the new issue in?
-		//RIGHTTTTTT we're not supposed to modify the state directly!
+		//we do this because we're not supposed to modify the state directly
 		//so we make a new array, that includes the entire old one
 		const newIssues = this.state.issues.slice();
 		//and then we make a new id, one more than whatever it was already
@@ -176,14 +175,6 @@ class IssueList extends React.Component{
 		//when we setState, it triggers a rerendering
 		this.setState({ issues: newIssues });
 	}
-
-/*	createTestIssue(){
-		this.createIssue({
-			status: 'New', owner: 'Cliff Burton', created: new Date(),
-			title: 'My old band is no longer good.'
-		});
-	}*/
-
 
 	render(){
 		return(
