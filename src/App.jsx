@@ -204,8 +204,4 @@ class IssueList extends React.Component{
 //these arguments say (<what thing?>, <where do we put it?>);
 ReactDOM.render(<IssueList />, contentNode);
 
-/*const continents = ['Savage Land', 'Wakanda', 'Latvertia', 'Danger Room'];
-const message = continents.map(c => `Hello ${c}!`).join(" ");
-*/
-//const component = <p>{message}</p>;
 
