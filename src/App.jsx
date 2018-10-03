@@ -20,19 +20,24 @@ class BorderWrap extends React.Component{
 
 
 //now we're making these into stateless components
-const IssueRow = (props) =>{
-//class IssueRow extends React.Component{
+//this has => () instead of => {}, because it doesn't return anything
+//const IssueRow = (props) =>(
+class IssueRow extends React.Component{
+	render() {
+		const issue = this.props.issue;
+		return(
 			<tr>
-				<td>{props.issue.id}</td>
-				<td>{props.issue.status}</td>
-				<td>{props.issue.owner}</td>
-				<td>{props.issue.created.toDateString()}</td>
-				<td>{props.issue.effort}</td>
-				<td>{props.issue.completionDate ? issue.completionDate.toDateString() : ''}</td>
-				<td>{props.issue.title}</td>
+				<td>{issue.id}</td>
+				<td>{issue.status}</td>
+				<td>{issue.owner}</td>
+				<td>{issue.created.toDateString()}</td>
+				<td>{issue.effort}</td>
+				<td>{issue.completionDate ? issue.completionDate.toDateString() : ''}</td>
+				<td>{issue.title}</td>
 			</tr>	
+		)
+	}
 }
-
 //this was coming up as undefined because I had it above the IssueRow class
 
 //we only do this in development mode, when properties are more likely to change
@@ -53,7 +58,7 @@ function IssueTable(props) {
 //class IssueTable extends React.Component{
 //	render(){
 
-		const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue} />)
+		const issueRows = props.issues.map(issue => <IssueRow key={issue.id} issue={issue} />)
 		//this table has it's own style,but then it also takes in
 		//IssueRow, or children of issue row, which inherit the styles and
 		//props

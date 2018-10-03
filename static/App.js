@@ -43,62 +43,80 @@ var BorderWrap = function (_React$Component) {
 
 
 //now we're making these into stateless components
+//this has => () instead of => {}, because it doesn't return anything
+//const IssueRow = (props) =>(
 
 
-var IssueRow = function IssueRow(props) {
-	//class IssueRow extends React.Component{
-	React.createElement(
-		'tr',
-		null,
-		React.createElement(
-			'td',
-			null,
-			props.issue.id
-		),
-		React.createElement(
-			'td',
-			null,
-			props.issue.status
-		),
-		React.createElement(
-			'td',
-			null,
-			props.issue.owner
-		),
-		React.createElement(
-			'td',
-			null,
-			props.issue.created.toDateString()
-		),
-		React.createElement(
-			'td',
-			null,
-			props.issue.effort
-		),
-		React.createElement(
-			'td',
-			null,
-			props.issue.completionDate ? issue.completionDate.toDateString() : ''
-		),
-		React.createElement(
-			'td',
-			null,
-			props.issue.title
-		)
-	);
-};
+var IssueRow = function (_React$Component2) {
+	_inherits(IssueRow, _React$Component2);
 
+	function IssueRow() {
+		_classCallCheck(this, IssueRow);
+
+		return _possibleConstructorReturn(this, (IssueRow.__proto__ || Object.getPrototypeOf(IssueRow)).apply(this, arguments));
+	}
+
+	_createClass(IssueRow, [{
+		key: 'render',
+		value: function render() {
+			var issue = this.props.issue;
+			return React.createElement(
+				'tr',
+				null,
+				React.createElement(
+					'td',
+					null,
+					issue.id
+				),
+				React.createElement(
+					'td',
+					null,
+					issue.status
+				),
+				React.createElement(
+					'td',
+					null,
+					issue.owner
+				),
+				React.createElement(
+					'td',
+					null,
+					issue.created.toDateString()
+				),
+				React.createElement(
+					'td',
+					null,
+					issue.effort
+				),
+				React.createElement(
+					'td',
+					null,
+					issue.completionDate ? issue.completionDate.toDateString() : ''
+				),
+				React.createElement(
+					'td',
+					null,
+					issue.title
+				)
+			);
+		}
+	}]);
+
+	return IssueRow;
+}(React.Component);
 //this was coming up as undefined because I had it above the IssueRow class
 
 //we only do this in development mode, when properties are more likely to change
+
+
 IssueRow.propTypes = {
 	issue_id: React.PropTypes.number,
 	//took away .number.isRequired ... was causing an error
 	issue_title: React.PropTypes.string
 };
 
-var IssueFilter = function (_React$Component2) {
-	_inherits(IssueFilter, _React$Component2);
+var IssueFilter = function (_React$Component3) {
+	_inherits(IssueFilter, _React$Component3);
 
 	function IssueFilter() {
 		_classCallCheck(this, IssueFilter);
@@ -120,11 +138,11 @@ var IssueFilter = function (_React$Component2) {
 	return IssueFilter;
 }(React.Component);
 
-var IssueTable = function IssueTable(props) {
+function IssueTable(props) {
 	//class IssueTable extends React.Component{
 	//	render(){
 
-	var issueRows = undefined.props.issues.map(function (issue) {
+	var issueRows = props.issues.map(function (issue) {
 		return React.createElement(IssueRow, { key: issue.id, issue: issue });
 	});
 	//this table has it's own style,but then it also takes in
@@ -189,19 +207,19 @@ var IssueTable = function IssueTable(props) {
 			)
 		)
 	);
-};
+}
 
-var IssueAdd = function (_React$Component3) {
-	_inherits(IssueAdd, _React$Component3);
+var IssueAdd = function (_React$Component4) {
+	_inherits(IssueAdd, _React$Component4);
 
 	function IssueAdd() {
 		_classCallCheck(this, IssueAdd);
 
 		//bound this up here, so the code below can be smoother
-		var _this3 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
+		var _this4 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
 
-		_this3.handleSubmit = _this3.handleSubmit.bind(_this3);
-		return _this3;
+		_this4.handleSubmit = _this4.handleSubmit.bind(_this4);
+		return _this4;
 	}
 
 	_createClass(IssueAdd, [{
@@ -252,16 +270,16 @@ var issues = [{
 	effort: 1000, completionDate: new Date('1988-03-05'), title: "I'm not in the band anymore"
 }];
 
-var IssueList = function (_React$Component4) {
-	_inherits(IssueList, _React$Component4);
+var IssueList = function (_React$Component5) {
+	_inherits(IssueList, _React$Component5);
 
 	function IssueList() {
 		_classCallCheck(this, IssueList);
 
 		//initialize state
-		var _this4 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
+		var _this5 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
-		_this4.state = { issues: [] };
+		_this5.state = { issues: [] };
 
 		//HERE, we we got rid of multiple binds
 		//by this.createTestIssue with a permanently bound version
@@ -271,8 +289,8 @@ var IssueList = function (_React$Component4) {
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
 		//setTimeout(this.createTestIssue, 2000);
-		_this4.createIssue = _this4.createIssue.bind(_this4);
-		return _this4;
+		_this5.createIssue = _this5.createIssue.bind(_this5);
+		return _this5;
 	}
 
 	_createClass(IssueList, [{
@@ -283,10 +301,10 @@ var IssueList = function (_React$Component4) {
 	}, {
 		key: 'loadData',
 		value: function loadData() {
-			var _this5 = this;
+			var _this6 = this;
 
 			setTimeout(function () {
-				_this5.setState({ issues: issues });
+				_this6.setState({ issues: issues });
 			}, 500);
 		}
 	}, {
