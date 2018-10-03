@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20,11 +20,11 @@ var BorderWrap = function (_React$Component) {
 	}
 
 	_createClass(BorderWrap, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
 			var borderedStyle = { border: "1px solid silver", padding: 6 };
 			return React.createElement(
-				"div",
+				'div',
 				{ style: borderedStyle },
 				this.props.children
 			);
@@ -41,85 +41,64 @@ var BorderWrap = function (_React$Component) {
 //</BorderWrap>
 //.....................THIS WORKS because of this.props.children
 
-var IssueRow = function (_React$Component2) {
-	_inherits(IssueRow, _React$Component2);
 
-	function IssueRow() {
-		_classCallCheck(this, IssueRow);
+//now we're making these into stateless components
 
-		return _possibleConstructorReturn(this, (IssueRow.__proto__ || Object.getPrototypeOf(IssueRow)).apply(this, arguments));
-	}
 
-	_createClass(IssueRow, [{
-		key: "render",
-		value: function render() {
-			console.log("rendered!");
-			var borderedStyle = { border: "1px solid silver", padding: 4 };
-			var issue = this.props.issue;
-			return (
-				//this IssueRow passes these things on to its children
-				//the style and the props below
-				//so the issue_id CAN'T be changed to children yet, it just showed the
-				//issue title twice, instead of id and title
-				React.createElement(
-					"tr",
-					null,
-					React.createElement(
-						"td",
-						null,
-						issue.id
-					),
-					React.createElement(
-						"td",
-						null,
-						issue.status
-					),
-					React.createElement(
-						"td",
-						null,
-						issue.owner
-					),
-					React.createElement(
-						"td",
-						null,
-						issue.created.toDateString()
-					),
-					React.createElement(
-						"td",
-						null,
-						issue.effort
-					),
-					React.createElement(
-						"td",
-						null,
-						issue.completionDate ? issue.completionDate.toDateString() : ''
-					),
-					React.createElement(
-						"td",
-						null,
-						issue.title
-					)
-				)
-			);
-		}
-	}]);
+var IssueRow = function IssueRow(props) {
+	//class IssueRow extends React.Component{
+	React.createElement(
+		'tr',
+		null,
+		React.createElement(
+			'td',
+			null,
+			props.issue.id
+		),
+		React.createElement(
+			'td',
+			null,
+			props.issue.status
+		),
+		React.createElement(
+			'td',
+			null,
+			props.issue.owner
+		),
+		React.createElement(
+			'td',
+			null,
+			props.issue.created.toDateString()
+		),
+		React.createElement(
+			'td',
+			null,
+			props.issue.effort
+		),
+		React.createElement(
+			'td',
+			null,
+			props.issue.completionDate ? issue.completionDate.toDateString() : ''
+		),
+		React.createElement(
+			'td',
+			null,
+			props.issue.title
+		)
+	);
+};
 
-	return IssueRow;
-}(React.Component);
-
-//this was coming up as undefined because I had it above the IssueRow class!
+//this was coming up as undefined because I had it above the IssueRow class
 
 //we only do this in development mode, when properties are more likely to change
-
-
 IssueRow.propTypes = {
 	issue_id: React.PropTypes.number,
 	//took away .number.isRequired ... was causing an error
 	issue_title: React.PropTypes.string
 };
 
-var IssueFilter = function (_React$Component3) {
-	_inherits(IssueFilter, _React$Component3);
+var IssueFilter = function (_React$Component2) {
+	_inherits(IssueFilter, _React$Component2);
 
 	function IssueFilter() {
 		_classCallCheck(this, IssueFilter);
@@ -128,12 +107,12 @@ var IssueFilter = function (_React$Component3) {
 	}
 
 	_createClass(IssueFilter, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
 			return React.createElement(
-				"div",
+				'div',
 				null,
-				"IssueFilter will go here."
+				'IssueFilter will go here.'
 			);
 		}
 	}]);
@@ -141,105 +120,92 @@ var IssueFilter = function (_React$Component3) {
 	return IssueFilter;
 }(React.Component);
 
-var IssueTable = function (_React$Component4) {
-	_inherits(IssueTable, _React$Component4);
+var IssueTable = function IssueTable(props) {
+	//class IssueTable extends React.Component{
+	//	render(){
 
-	function IssueTable() {
-		_classCallCheck(this, IssueTable);
+	var issueRows = undefined.props.issues.map(function (issue) {
+		return React.createElement(IssueRow, { key: issue.id, issue: issue });
+	});
+	//this table has it's own style,but then it also takes in
+	//IssueRow, or children of issue row, which inherit the styles and
+	//props
+	var borderedStyle = { border: "1px solid silver", padding: 6 };
+	return (
+		//but why is there a double curly brace here?
 
-		return _possibleConstructorReturn(this, (IssueTable.__proto__ || Object.getPrototypeOf(IssueTable)).apply(this, arguments));
-	}
-
-	_createClass(IssueTable, [{
-		key: "render",
-		value: function render() {
-
-			var issueRows = this.props.issues.map(function (issue) {
-				return React.createElement(IssueRow, { key: issue.id, issue: issue });
-			});
-			//this table has it's own style,but then it also takes in
-			//IssueRow, or children of issue row, which inherit the styles and
-			//props
-			var borderedStyle = { border: "1px solid silver", padding: 6 };
-			return (
-				//but why is there a double curly brace here?
-
-				//the FIRST brace is our "escape into Javascript"
-				//the second brace is just an object, the attribute's value
+		//the FIRST brace is our "escape into Javascript"
+		//the second brace is just an object, the attribute's value
+		React.createElement(
+			'table',
+			{ className: 'bordered-table' },
+			React.createElement(
+				'thead',
+				null,
 				React.createElement(
-					"table",
-					{ style: { borderCollapse: "collapse" } },
+					'tr',
+					null,
 					React.createElement(
-						"thead",
+						'th',
 						null,
-						React.createElement(
-							"tr",
-							null,
-							React.createElement(
-								"th",
-								null,
-								"Id"
-							),
-							React.createElement(
-								"th",
-								null,
-								"Status"
-							),
-							React.createElement(
-								"th",
-								null,
-								"Ownder"
-							),
-							React.createElement(
-								"th",
-								null,
-								"Created"
-							),
-							React.createElement(
-								"th",
-								null,
-								"Effort"
-							),
-							React.createElement(
-								"th",
-								null,
-								"Completion Date"
-							),
-							React.createElement(
-								"th",
-								null,
-								"Title"
-							)
-						)
+						'Id'
 					),
 					React.createElement(
-						"tbody",
+						'th',
 						null,
-						issueRows
+						'Status'
+					),
+					React.createElement(
+						'th',
+						null,
+						'Owner'
+					),
+					React.createElement(
+						'th',
+						null,
+						'Created'
+					),
+					React.createElement(
+						'th',
+						null,
+						'Effort'
+					),
+					React.createElement(
+						'th',
+						null,
+						'Completion Date'
+					),
+					React.createElement(
+						'th',
+						null,
+						'Title'
 					)
 				)
-			);
-		}
-	}]);
+			),
+			React.createElement(
+				'tbody',
+				null,
+				issueRows
+			)
+		)
+	);
+};
 
-	return IssueTable;
-}(React.Component);
-
-var IssueAdd = function (_React$Component5) {
-	_inherits(IssueAdd, _React$Component5);
+var IssueAdd = function (_React$Component3) {
+	_inherits(IssueAdd, _React$Component3);
 
 	function IssueAdd() {
 		_classCallCheck(this, IssueAdd);
 
 		//bound this up here, so the code below can be smoother
-		var _this5 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
+		var _this3 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
 
-		_this5.handleSubmit = _this5.handleSubmit.bind(_this5);
-		return _this5;
+		_this3.handleSubmit = _this3.handleSubmit.bind(_this3);
+		return _this3;
 	}
 
 	_createClass(IssueAdd, [{
-		key: "handleSubmit",
+		key: 'handleSubmit',
 		value: function handleSubmit(e) {
 			e.preventDefault();
 			var form = document.forms.issueAdd;
@@ -253,20 +219,20 @@ var IssueAdd = function (_React$Component5) {
 			form.owner.value = "";form.title.value = "";
 		}
 	}, {
-		key: "render",
+		key: 'render',
 		value: function render() {
 			return React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"form",
-					{ name: "issueAdd", onSubmit: this.handleSubmit },
-					React.createElement("input", { type: "text", name: "owner", placeholder: "Owner" }),
-					React.createElement("input", { type: "text", name: "title", placeholder: "Title" }),
+					'form',
+					{ name: 'issueAdd', onSubmit: this.handleSubmit },
+					React.createElement('input', { type: 'text', name: 'owner', placeholder: 'Owner' }),
+					React.createElement('input', { type: 'text', name: 'title', placeholder: 'Title' }),
 					React.createElement(
-						"button",
+						'button',
 						null,
-						"Add"
+						'Add'
 					)
 				)
 			);
@@ -286,16 +252,16 @@ var issues = [{
 	effort: 1000, completionDate: new Date('1988-03-05'), title: "I'm not in the band anymore"
 }];
 
-var IssueList = function (_React$Component6) {
-	_inherits(IssueList, _React$Component6);
+var IssueList = function (_React$Component4) {
+	_inherits(IssueList, _React$Component4);
 
 	function IssueList() {
 		_classCallCheck(this, IssueList);
 
-		//we initialize state here
-		var _this6 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
+		//initialize state
+		var _this4 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
-		_this6.state = { issues: [] };
+		_this4.state = { issues: [] };
 
 		//HERE, we we got rid of multiple binds
 		//by this.createTestIssue with a permanently bound version
@@ -305,29 +271,28 @@ var IssueList = function (_React$Component6) {
 		//if we didn't use .bind, the "this" would be set to the timer event
 		//rather than the Issue
 		//setTimeout(this.createTestIssue, 2000);
-		_this6.createIssue = _this6.createIssue.bind(_this6);
-		return _this6;
+		_this4.createIssue = _this4.createIssue.bind(_this4);
+		return _this4;
 	}
 
 	_createClass(IssueList, [{
-		key: "componentDidMount",
+		key: 'componentDidMount',
 		value: function componentDidMount() {
 			this.loadData();
 		}
 	}, {
-		key: "loadData",
+		key: 'loadData',
 		value: function loadData() {
-			var _this7 = this;
+			var _this5 = this;
 
 			setTimeout(function () {
-				_this7.setState({ issues: issues });
+				_this5.setState({ issues: issues });
 			}, 500);
 		}
 	}, {
-		key: "createIssue",
+		key: 'createIssue',
 		value: function createIssue(newIssue) {
-			//TODO: why did we use slice, instead of just pushing the new issue in?
-			//RIGHTTTTTT we're not supposed to modify the state directly!
+			//we do this because we're not supposed to modify the state directly
 			//so we make a new array, that includes the entire old one
 			var newIssues = this.state.issues.slice();
 			//and then we make a new id, one more than whatever it was already
@@ -337,29 +302,21 @@ var IssueList = function (_React$Component6) {
 			//when we setState, it triggers a rerendering
 			this.setState({ issues: newIssues });
 		}
-
-		/*	createTestIssue(){
-  		this.createIssue({
-  			status: 'New', owner: 'Cliff Burton', created: new Date(),
-  			title: 'My old band is no longer good.'
-  		});
-  	}*/
-
 	}, {
-		key: "render",
+		key: 'render',
 		value: function render() {
 			return React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"h1",
+					'h1',
 					null,
-					"Issue Tracker"
+					'Issue Tracker'
 				),
 				React.createElement(IssueFilter, null),
-				React.createElement("hr", null),
+				React.createElement('hr', null),
 				React.createElement(IssueTable, { issues: this.state.issues }),
-				React.createElement("hr", null),
+				React.createElement('hr', null),
 				React.createElement(IssueAdd, { createIssue: this.createIssue })
 			);
 		}
@@ -372,8 +329,3 @@ var IssueList = function (_React$Component6) {
 
 
 ReactDOM.render(React.createElement(IssueList, null), contentNode);
-
-/*const continents = ['Savage Land', 'Wakanda', 'Latvertia', 'Danger Room'];
-const message = continents.map(c => `Hello ${c}!`).join(" ");
-*/
-//const component = <p>{message}</p>;

@@ -49,7 +49,7 @@ class IssueFilter extends React.Component{
 		)
 	}
 }
-const IssueTable = (props) => {
+function IssueTable(props) {
 //class IssueTable extends React.Component{
 //	render(){
 
