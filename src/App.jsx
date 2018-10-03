@@ -18,27 +18,19 @@ class BorderWrap extends React.Component{
 //</BorderWrap>
 //.....................THIS WORKS because of this.props.children
 
-class IssueRow extends React.Component{
-	render(){
-		console.log("rendered!");
-		const borderedStyle = {border: "1px solid silver", padding: 4};
-		const issue = this.props.issue;
-		return(
-	
+
+//now we're making these into stateless components
+const IssueRow = (props) =>{
+//class IssueRow extends React.Component{
 			<tr>
-			{
-				}
-				<td>{issue.id}</td>
-				<td>{issue.status}</td>
-				<td>{issue.owner}</td>
-				<td>{issue.created.toDateString()}</td>
-				<td>{issue.effort}</td>
-				<td>{issue.completionDate ? issue.completionDate.toDateString() : ''}</td>
-				<td>{issue.title}</td>
-		
-			</tr>
-		)
-	}
+				<td>{props.issue.id}</td>
+				<td>{props.issue.status}</td>
+				<td>{props.issue.owner}</td>
+				<td>{props.issue.created.toDateString()}</td>
+				<td>{props.issue.effort}</td>
+				<td>{props.issue.completionDate ? issue.completionDate.toDateString() : ''}</td>
+				<td>{props.issue.title}</td>
+			</tr>	
 }
 
 //this was coming up as undefined because I had it above the IssueRow class
