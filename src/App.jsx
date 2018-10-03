@@ -49,9 +49,9 @@ class IssueFilter extends React.Component{
 		)
 	}
 }
-
-class IssueTable extends React.Component{
-	render(){
+const IssueTable = (props) => {
+//class IssueTable extends React.Component{
+//	render(){
 
 		const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue} />)
 		//this table has it's own style,but then it also takes in
@@ -63,7 +63,7 @@ class IssueTable extends React.Component{
 
 			//the FIRST brace is our "escape into Javascript"
 			//the second brace is just an object, the attribute's value
-			<table  style={{borderCollapse: "collapse"}}>
+			<table className="bordered-table">
 				<thead>
 					<tr>
 						<th>Id</th>
@@ -79,9 +79,9 @@ class IssueTable extends React.Component{
 					{issueRows}
 				</tbody>
 			</table>
-		)
+		);
 	}
-}
+
 
 class IssueAdd extends React.Component{
 	constructor(){
