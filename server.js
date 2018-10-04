@@ -21,6 +21,19 @@ app.get('/api/issues', (req, res) => {
 	res.json({ _metadata: metadata, records: issues });
 });
 
+app.post('/api/issue', (req, res) => {
+	const newIssue = req.body;
+	newIssue.id = issues.length + 1;
+	newIssue.created = new Date();
+
+	if(!newIssue.status)
+	newIssue.status = 'New';
+
+	issues.push(newIssue);
+
+	re.json(newIssue);
+})
+
 app.listen(3000, function(){
 	console.log("App started on port 3000");
 });
